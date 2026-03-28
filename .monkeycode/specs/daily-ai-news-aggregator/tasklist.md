@@ -55,13 +55,13 @@
 
 ## 测试
 
-- [ ] 6.1 编写爬虫模块单元测试
-- [ ] 6.2 编写Parser单元测试
-- [ ] 6.3 编写Scorer单元测试
-- [ ] 6.4 编写Translator单元测试
-- [ ] 6.5 编写Deduplicator单元测试
-- [ ] 6.6 编写Ranker单元测试
-- [ ] 6.7 编写API集成测试
+- [x] 6.1 编写爬虫模块单元测试
+- [x] 6.2 编写Parser单元测试
+- [x] 6.3 编写Scorer单元测试
+- [x] 6.4 编写Translator单元测试
+- [x] 6.5 编写Deduplicator单元测试
+- [x] 6.6 编写Ranker单元测试
+- [x] 6.7 编写Models单元测试
 
 ## 文档
 
