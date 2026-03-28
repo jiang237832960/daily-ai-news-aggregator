@@ -15,8 +15,14 @@ class Parser:
     
     def parse(self, raw: RawContent, source_name: str, source_type: str) -> Article:
         """Parse RawContent into Article"""
-        content = self._clean_html(raw.content)
-        summary = self._generate_summary(content)
+        content = self._clean_html(raw.content) if raw.content else ""
+        
+        if not content and raw.title:
+            summary = self._generate_summary_from_title(raw.title)
+        else:
+            summary = self._generate_summary(content)
+        
+        display_content = content if content else raw.title
         
         return Article(
             title=raw.title,
@@ -24,7 +30,7 @@ class Parser:
             url=raw.url,
             url_normalized=self._normalize_url(raw.url),
             summary=summary,
-            content=content[:self._content_length_limit],
+            content=display_content[:self._content_length_limit] if display_content else "",
             content_raw=raw.content,
             source=source_type,
             source_name=source_name,
@@ -32,8 +38,14 @@ class Parser:
             published_at=raw.published_at,
             fetched_at=raw.fetched_at,
             engagement=raw.engagement,
-            tags=self._extract_tags(raw.title, content)
+            tags=self._extract_tags(raw.title, display_content)
         )
+    
+    def _generate_summary_from_title(self, title: str) -> str:
+        """Generate summary from title when no content is available"""
+        if not title:
+            return ""
+        return title
     
     def _clean_html(self, text: str) -> str:
         """Remove HTML tags from content"""

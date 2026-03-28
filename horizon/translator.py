@@ -22,7 +22,7 @@ class Translator:
         self.enabled = config.translation.get("enabled", True)
         self._google_translator: Optional[GoogleTranslator] = None
     
-    async def translate(self, text: str, source_lang: str = 'en', target_lang: str = 'zh') -> str:
+    async def translate(self, text: str, source_lang: str = 'en', target_lang: str = 'zh-cn') -> str:
         """Translate text to target language"""
         if not self.enabled or not text:
             return text
@@ -35,7 +35,8 @@ class Translator:
                 return await self._translate_google(text, source_lang, target_lang)
             else:
                 return text
-        except Exception:
+        except Exception as e:
+            print(f"Translation error: {e}")
             return text
     
     async def _translate_google(
@@ -48,17 +49,19 @@ class Translator:
         if self._google_translator is None:
             self._google_translator = GoogleTranslator()
         
-        loop = asyncio.get_event_loop()
-        result = await loop.run_in_executor(
-            None,
-            lambda: self._google_translator.translate(
+        try:
+            result = await self._google_translator.translate(
                 text,
                 src=source_lang,
                 dest=target_lang
             )
-        )
-        
-        return result.text if result else text
+            return result.text if hasattr(result, 'text') else str(result)
+        except Exception as e:
+            try:
+                result = self._google_translator.translate(text, src=source_lang, dest=target_lang)
+                return result.text if hasattr(result, 'text') else str(result)
+            except Exception:
+                return text
     
     async def translate_article(self, article: Article) -> Article:
         """Translate article content"""
@@ -70,10 +73,10 @@ class Translator:
                 article.title_raw or article.title
             )
         
-        if self._is_english(article.content_raw or article.content):
-            article.content = await self.translate(
-                article.content_raw or article.content
-            )
+        if article.content and self._is_english(article.content):
+            article.content = await self.translate(article.content)
+        
+        if article.summary and self._is_english(article.summary):
             article.summary = await self.translate(article.summary)
         
         return article
