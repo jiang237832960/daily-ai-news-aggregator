@@ -1,0 +1,3 @@
+"""Horizon - AI News Aggregator & Translator"""
+
+__version__ = "0.1.0"
