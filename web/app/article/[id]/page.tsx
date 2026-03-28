@@ -75,9 +75,17 @@ export default function ArticlePage() {
         </header>
         
         <div className="prose max-w-none">
-          <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            {article.summary}
-          </p>
+          {article.summary && article.summary !== article.title ? (
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              {article.summary}
+            </p>
+          ) : (
+            <div className="bg-blue-50 rounded-lg p-4 mb-6">
+              <p className="text-blue-800">
+                此文章来自 {article.source_name}，点击下方"阅读原文"按钮查看完整内容。
+              </p>
+            </div>
+          )}
           
           {article.content && (
             <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">

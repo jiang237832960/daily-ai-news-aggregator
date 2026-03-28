@@ -106,7 +106,11 @@ export default function HomePage() {
                 <span>热度: {article.hotness.toFixed(0)}</span>
               </div>
               
-              <p className="text-gray-600 mt-2 line-clamp-2">{article.summary}</p>
+              <p className="text-gray-600 mt-2 line-clamp-2">
+                {article.summary && article.summary !== article.title 
+                  ? article.summary 
+                  : '点击"原文"链接查看完整内容'}
+              </p>
               
               <div className="flex gap-2 mt-3">
                 {article.tags.map(tag => (
