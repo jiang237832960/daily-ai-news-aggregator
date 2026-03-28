@@ -100,6 +100,7 @@
 5. WHERE 文章发布时间在24小时内，系统 SHALL 增加2分（新鲜度高）。
 6. IF 文章包含代码、技术术语、图表等专业技术元素，RuleScorer SHALL 增加1分。
 7. IF 最终分数超过10分，系统 SHALL 截断为10分。
+8. WHERE 多平台同时报道同一事件，系统 SHALL 检测跨平台收敛并增加2分（热点事件）。
 
 ### 需求6：热度排名
 
@@ -112,6 +113,7 @@
 3. WHERE 互动指标包括评论数、点赞数、转发数，系统 SHALL 从各平台抓取这些数据（如果可用）。
 4. IF 同一话题的多篇文章，系统 SHALL 合并计算话题整体热度。
 5. WHEN 用户访问热度榜单时，界面 SHALL 按热度分数倒序显示文章。
+6. WHERE 热度随时间衰减（24小时内权重1.0，每过24小时降低10%），HotnessRanker SHALL 应用时间衰减算法。
 
 ### 需求7：智能排序与筛选
 
@@ -286,7 +288,8 @@
 
 本项目设计参考了以下开源项目：
 
-- **Horizon** (https://github.com/Thysrael/Horizon) - 全自动AI科技新闻聚合与摘要生成器，本项目简化设计，无需AI模型
+- **Horizon** (https://github.com/Thysrael/Horizon) - 全自动AI科技新闻聚合与摘要生成器，支持多源聚合、AI评分、双语摘要、静态站点部署
+- **/last30days** (https://github.com/mvanhorn/last30days-skill) - AI agent skill，从Reddit、X、YouTube、HN、Polymarket等多源研究话题，支持跨平台收敛检测、时间衰减算法、质量排名
 - **AI-News-Aggregator** - 基于Python的RSS新闻聚合器，支持每日摘要和Notion集成
 - **ai-daily-digest** - 从90个顶级技术博客获取Hacker News内容的AI日报
 
