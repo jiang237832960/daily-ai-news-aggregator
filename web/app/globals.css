@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #3b82f6;
+  --secondary: #8b5cf6;
+  --accent: #f59e0b;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.article-card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-100 p-4 hover:shadow-md transition-shadow;
+}
+
+.article-title {
+  @apply text-lg font-semibold text-gray-900 hover:text-blue-600 cursor-pointer line-clamp-2;
+}
+
+.article-meta {
+  @apply text-sm text-gray-500 mt-2 flex items-center gap-2;
+}
+
+.tag {
+  @apply inline-block px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-700;
+}

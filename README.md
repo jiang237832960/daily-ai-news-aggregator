@@ -9,7 +9,8 @@ AI资讯聚合与翻译平台，自动获取每日最新AI资讯并翻译为中�
 - **规则评分**：基于来源权威性、关键词、内容长度、新鲜度等规则计算质量分数
 - **热度排名**：多维度指标计算，支持时间衰减算法
 - **自动翻译**：集成 Google Translate，自动将内容翻译为中文
-- **定时任务**：支持每日自动抓取
+- **REST API**：FastAPI 提供完整的 REST 接口
+- **Web界面**：Next.js 构建的响应式管理界面
 - **CLI工具**：丰富的命令行工具，方便管理
 
 ## 支持的来源
@@ -29,6 +30,7 @@ AI资讯聚合与翻译平台，自动获取每日最新AI资讯并翻译为中�
 ### 前置要求
 
 - Python 3.11+
+- Node.js 18+
 - pip 或 uv
 
 ### 安装步骤
@@ -42,9 +44,57 @@ cd daily-ai-news-aggregator
 cd horizon
 pip install -e .
 
-# 或者使用 uv
-uv sync
+# 安装前端依赖
+cd ../web
+npm install
 ```
+
+## 快速启动
+
+### 一键启动（推荐）
+
+```bash
+./start.sh
+```
+
+这将同时启动后端和前端服务。
+
+### 分别启动
+
+```bash
+# 终端1: 启动后端API
+cd horizon
+python -m uvicorn horizon.api:app --reload --port 8000
+
+# 终端2: 启动前端
+cd web
+npm run dev
+```
+
+## Web界面
+
+启动后访问 http://localhost:3000
+
+功能：
+- 首页：浏览、搜索、筛选文章
+- 文章详情：阅读完整内容和原文
+- 趋势：查看发布统计和来源分布图表
+- 来源管理：查看配置的资讯来源
+
+## REST API
+
+启动后访问 http://localhost:8000/docs 查看 API 文档。
+
+### 主要接口
+
+| 接口 | 方法 | 描述 |
+|------|------|------|
+| `/api/articles` | GET | 获取文章列表 |
+| `/api/articles/{id}` | GET | 获取文章详情 |
+| `/api/articles/{id}/read` | POST | 标记已读 |
+| `/api/sources` | GET | 获取来源列表 |
+| `/api/stats` | GET | 获取统计数据 |
+| `/api/trends` | GET | 获取趋势数据 |
 
 ## 使用
 
