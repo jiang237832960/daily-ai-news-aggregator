@@ -17,6 +17,12 @@
 - **CLI**: 命令行界面，用户通过命令行触发抓取任务
 - **Trend Chart**: 趋势图表，展示技术话题热度变化
 - **Deduplication**: 去重机制，跨源合并相同URL的内容
+- **X (Twitter)**: 社交媒体平台，用户获取实时资讯和专家观点
+- **Facebook**: 社交媒体平台，支持公开页面内容获取
+- **Lobsters**: 技术社区，类似HackerNews的程序员社区
+- **Stack Overflow**: 开发者问答平台，技术问题讨论
+- **DEV Community**: 开发者技术博客社区
+- **Medium**: 在线文章发布平台，技术博客聚集地
 
 ## 需求
 
@@ -46,6 +52,14 @@
 4. WHERE Source类型为"GitHub"时，系统 SHALL 支持获取仓库releases和用户事件。
 5. WHERE Source类型为"微信公众号"时，系统 SHALL 通过第三方API（如可能）获取文章列表。
 6. WHERE Source类型为"ArXiv"时，系统 SHALL 支持获取最新提交的AI/ML论文。
+7. WHERE Source类型为"X (Twitter)"时，系统 SHALL 支持通过API获取指定账号的推文或关键词搜索结果。
+8. WHERE Source类型为"Facebook"时，系统 SHALL 支持获取公开页面（Page）的帖子内容。
+9. WHERE Source类型为"Lobsters"时，系统 SHALL 支持获取热门故事和评论。
+10. WHERE Source类型为"Stack Overflow"时，系统 SHALL 支持获取指定标签的问题和答案。
+11. WHERE Source类型为"DEV Community"时，系统 SHALL 支持获取热门文章和标签过滤。
+12. WHERE Source类型为"Medium"时，系统 SHALL 支持获取热门文章和关键词搜索。
+13. WHERE Source类型为"YouTube"时，系统 SHALL 支持获取AI相关频道的最新视频和标题。
+14. WHERE Source需要认证（如X API、Reddit API），系统 SHALL 支持OAuth2/API Key两种认证方式。
 
 ### 需求3：内容解析与结构化
 
