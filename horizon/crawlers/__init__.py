@@ -1,6 +1,6 @@
 """Crawlers package"""
 
-from .base import BaseCrawler
+from .base import BaseCrawler, CrawlerFactory, register_crawler
 from .hackernews import HackerNewsCrawler
 from .rss import RSSCrawler
 from .reddit import RedditCrawler
@@ -11,6 +11,8 @@ from .youtube import YouTubeCrawler
 
 __all__ = [
     "BaseCrawler",
+    "CrawlerFactory",
+    "register_crawler",
     "HackerNewsCrawler",
     "RSSCrawler",
     "RedditCrawler",

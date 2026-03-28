@@ -92,6 +92,7 @@ class RawContent(BaseModel):
     content: str
     author: str = ""
     published_at: Optional[datetime] = None
+    fetched_at: datetime = Field(default_factory=datetime.now)
     engagement: Engagement = Field(default_factory=Engagement)
     raw_data: dict = Field(default_factory=dict)
 
